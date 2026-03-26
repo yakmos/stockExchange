@@ -347,6 +347,7 @@ let newsInt = null;
 let allPlayers = {};
 let usedNews = [];
 let tradeLog = [];
+let shownNewsTs = 0;
 
 /* ── refs ── */
 const rGame    = ()=>ref(db,`${ROOM}/game`);
@@ -459,11 +460,10 @@ function goTrading(){
   });
 
   /* listen news — show big popup only once per event */
-  let lastNewsTs = 0;
   onValue(rNews(), snap=>{
     const n = snap.val();
-    if(n && n.ts && n.ts !== lastNewsTs && Date.now()-n.ts < 15000){
-      lastNewsTs = n.ts;
+    if(n && n.ts && n.ts !== shownNewsTs && Date.now()-n.ts < 15000){
+      shownNewsTs = n.ts;
       showNewsPopup(n);
     }
   });
@@ -817,6 +817,8 @@ window.closeNewsPopup = function(e){
   if(popupTimer) clearInterval(popupTimer);
   const overlay = document.getElementById('newsOverlay');
   if(overlay) overlay.style.display = 'none';
+  /* mark current ts as seen so listener won't re-show */
+  shownNewsTs = Date.now();
 };
 
 /* ── RESET PLAYERS ── */

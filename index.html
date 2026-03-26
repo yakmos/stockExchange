@@ -299,29 +299,37 @@ const STOCKS_DEF = [
 ];
 
 const NEWS = [
-  {text:'תנובה מכריזה: "החמאה חוזרת למדפים!" — התור בסופר כבר מגיע לרחוב',sentiment:'bullish',stock:'TNUVA',effect:.14},
-  {text:'סקנדל: נמצאה חבילת גבינה בתנובה שפג תוקפה ב-2019. המניה בצלילה',sentiment:'bearish',stock:'TNUVA',effect:-.12},
-  {text:'תנובה מוסיפה טעם חדש לקוטג\'— וואסאבי ובצל ירוק. הציבור מבולבל',sentiment:'neutral',stock:'TNUVA',effect:.04},
-  {text:'שטראוס מכריזה על שוקולד עם 0 קלוריות — מדענים קוראים לחקירה',sentiment:'bullish',stock:'STRAUS',effect:.13},
-  {text:'שטראוס נזכרת: "שכחנו לשים שוקולד בפרל". המניה יורדת',sentiment:'bearish',stock:'STRAUS',effect:-.11},
-  {text:'שטראוס פותחת קפה בתל אביב — תור של 3 שעות כבר ביום הראשון',sentiment:'bullish',stock:'STRAUS',effect:.09},
-  {text:'בזק מבטיחה אינטרנט מהיר לכל הארץ — כולל מרתף ההורים שלך',sentiment:'bullish',stock:'BEZQ',effect:.11},
-  {text:'40% מלקוחות בזק ניסו להתקשר לתמיכה — קיבלו מוזיקת המתנה 4 שעות',sentiment:'bearish',stock:'BEZQ',effect:-.13},
-  {text:'שופרסל מוסיפה קופות מהירות ל-5 פריטים — נתפס לקוח עם 47 פריטים',sentiment:'bearish',stock:'SHUFA',effect:-.09},
-  {text:'שופרסל אונליין: "נספק תוך שעה!" — בפועל: מחר אחרי הצהריים',sentiment:'bearish',stock:'SHUFA',effect:-.07},
-  {text:'שופרסל מכריזה על חניה חינם לשעה — פקחי עירייה כבר בדרך',sentiment:'bullish',stock:'SHUFA',effect:.08},
-  {text:'עלית מכריזה: "הבמבה לא תייקר!" — הציבור חוגג ברחובות',sentiment:'bullish',stock:'ELITE',effect:.15},
-  {text:'עלית שוקלת במבה בטעם חריף — ועדת מומחים מתכנסת בדחיפות',sentiment:'bullish',stock:'ELITE',effect:.08},
-  {text:'כמות האוויר בשקית הבמבה עולה שוב — מחאה ציבורית',sentiment:'bearish',stock:'ELITE',effect:-.10},
-  {text:'אסם מכריזה על מנה גדולה יותר בפסטה — 90% מהצרכנים מרוצים',sentiment:'bullish',stock:'OSEM',effect:.10},
-  {text:'התגלה: אסם לא ממש "תוצרת הארץ" כפי שחשבנו — ויכוח ציבורי עז',sentiment:'bearish',stock:'OSEM',effect:-.11},
-  {text:'שר האוצר: "הכלכלה במצב מצוין!" — הבורסה עולה, אף אחד לא יודע למה',sentiment:'bullish',stock:null,effect:.06},
-  {text:'חמסין כבד: כל הישראלים בבית עם מזגן — קניות אונליין בשיא',sentiment:'bullish',stock:null,effect:.07},
-  {text:'משפחה ישראלית ממוצעת מבלה 3 שעות בשבוע בפקקים — צריכת חטיפים עולה',sentiment:'bullish',stock:null,effect:.05},
-  {text:'הדולר עולה — כולם מודאגים. הדולר יורד — כולם מודאגים. כרגיל',sentiment:'bearish',stock:null,effect:-.05},
-  {text:'אזעקת שווא בבורסה — סוחרים ברחו, מחירים צנחו, הכל בסדר אחרי 10 דקות',sentiment:'bearish',stock:null,effect:-.07},
-  {text:'חגים בפתח — כולם קונים. כולם. עכשיו. הכל.',sentiment:'bullish',stock:null,effect:.08},
-  {text:'עצרת מחאה בכיכר: "יוקר המחיה!" — השוק מתרסק לרגע ומתאושש',sentiment:'bearish',stock:null,effect:-.06},
+  /* תנובה — חיובי */
+  {text:'תנובה מכריזה: "החמאה חוזרת למדפים!" — התור בסופר כבר מגיע לרחוב',sentiment:'bullish',stock:'TNUVA',effect:.10},
+  {text:'תנובה מציגה קוטג\' דל שומן בטעם שוקולד — ישראלים נדהמים ורוכשים בהמוניהם',sentiment:'bullish',stock:'TNUVA',effect:.08},
+  {text:'תנובה זוכה בפרס המוצר הטעים של השנה — מחלבות המתחרים בוכות',sentiment:'bullish',stock:'TNUVA',effect:.09},
+  {text:'מחסור בחלב בעולם — תנובה היחידה שמייצרת. הביקוש מזנק',sentiment:'bullish',stock:'TNUVA',effect:.12},
+  {text:'תנובה מוסיפה 200 גרם לאריזת הגבינה הצהובה — ללא עלייה במחיר',sentiment:'bullish',stock:'TNUVA',effect:.07},
+  /* תנובה — שלילי */
+  {text:'סקנדל: נמצאה חבילת גבינה תנובה שפג תוקפה ב-2019. המניה בצלילה חופשית',sentiment:'bearish',stock:'TNUVA',effect:-.11},
+  {text:'תנובה מייקרת את הקוטג\' ב-15% — מחאת הקוטג\' 2.0 פורצת ברשתות',sentiment:'bearish',stock:'TNUVA',effect:-.10},
+  {text:'נזכר: תנובה מוצאת עכבר במפעל. הציבור עובר לגבינות יבוא',sentiment:'bearish',stock:'TNUVA',effect:-.13},
+  {text:'בצורת בצפון — הפרות לא מרוצות, ייצור החלב של תנובה יורד ב-30%',sentiment:'bearish',stock:'TNUVA',effect:-.09},
+  {text:'תנובה מקטינה את אריזת השמנת ב-50 מ"ל — הישראלים מזועזעים',sentiment:'bearish',stock:'TNUVA',effect:-.07},
+  /* עלית — חיובי */
+  {text:'עלית מכריזה: "הבמבה לא תייקר ב-2025!" — הציבור חוגג ברחובות תל אביב',sentiment:'bullish',stock:'ELITE',effect:.11},
+  {text:'מחקר חדש: במבה מונעת אלרגיות — הורים ברחבי העולם קונים בהמוניהם',sentiment:'bullish',stock:'ELITE',effect:.13},
+  {text:'עלית חותמת על עסקת ייצוא ענקית לסין — 500 מיליון שקיות במבה בדרך למזרח',sentiment:'bullish',stock:'ELITE',effect:.12},
+  {text:'טעם חדש של טבע-דקל — פיסטוק ומלח ים. הישראלים משתגעים',sentiment:'bullish',stock:'ELITE',effect:.08},
+  {text:'עלית מכריזה על שוקולד עם 0 קלוריות — מדענים מבולבלים, הציבור קונה',sentiment:'bullish',stock:'ELITE',effect:.10},
+  /* עלית — שלילי */
+  {text:'נמדד: כמות האוויר בשקית הבמבה עלתה שוב ב-8% — ויקי מדיה מתעדת',sentiment:'bearish',stock:'ELITE',effect:-.09},
+  {text:'עלית מייקרת את הפרה של שטראוס... רגע, זה המתחרה. בכל זאת, עלית יורדת',sentiment:'bearish',stock:'ELITE',effect:-.06},
+  {text:'מפעל עלית בנתניה עוצר ייצור — בעיה במכונת הציפוי. אספקת שוקולד בסכנה',sentiment:'bearish',stock:'ELITE',effect:-.11},
+  {text:'ילד בראיון טלוויזיה: "הבמבה פחות טעימה מפעם." ישראל בהלם. המניה יורדת',sentiment:'bearish',stock:'ELITE',effect:-.08},
+  {text:'עלית מפסידה מכרז לספק חטיפים לצבא — נייבר גנבה את העסקה',sentiment:'bearish',stock:'ELITE',effect:-.10},
+  /* כלליות שמשפיעות על שתיהן */
+  {text:'ממשלה מכריזה על סבסוד מזון — חברות מזון ישראליות מזנקות',sentiment:'bullish',stock:null,effect:.07},
+  {text:'חגי תשרי בפתח — כולם קונים מתנות אוכל. ביקוש שיא לחטיפים ומוצרי חלב',sentiment:'bullish',stock:null,effect:.08},
+  {text:'שביתה כללית מחר — הציבור ממהר לסופר ומרוקן מדפים. חברות מזון מרוויחות',sentiment:'bullish',stock:null,effect:.09},
+  {text:'ממשלה מטילה מע"מ נוסף על מוצרי מזון — הציבור מזועזע, מניות יורדות',sentiment:'bearish',stock:null,effect:-.08},
+  {text:'חמסין כבד השבוע — כולם בבית, אוכלים חטיפים ושותים חלב. ביקוש עולה',sentiment:'bullish',stock:null,effect:.06},
+  {text:'דוח: ישראלים אוכלים פחות — דיאטות לאחר החגים. מניות מזון בלחץ',sentiment:'bearish',stock:null,effect:-.07},
 ];
 
 /* ── local state ── */
@@ -540,7 +548,7 @@ async function adminPrices(){
 }
 
 function scheduleNews(){
-  const delay = 25000+Math.random()*30000;
+  const delay = 55000+Math.random()*10000;
   newsInt = setTimeout(async()=>{
     if(gamePhase!=='trading')return;
     const available = NEWS.filter(n=>!usedNews.includes(n.text));

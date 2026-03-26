@@ -175,6 +175,7 @@ html,body{min-height:100vh;background:var(--bg);color:#e8eaf0;font-family:'Heebo
         <div style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:12px;">שתף את הקישור לשחקנים. כשכולם בפנים — לחץ התחל.</div>
         <div class="share-box" id="shareUrl" onclick="copyLink()" title="לחץ להעתקה"></div>
         <div id="adminStartArea"></div>
+        <button class="btn btn-outline btn-full" style="font-size:13px;margin-top:6px;color:var(--red);border-color:rgba(255,23,68,0.3);" onclick="resetPlayers()">🗑 אפס שחקנים</button>
         <div id="waitMsg" style="margin-top:10px;font-size:12px;color:rgba(255,255,255,0.3);text-align:center;"></div>
       </div>
     </div>
@@ -229,6 +230,7 @@ html,body{min-height:100vh;background:var(--bg);color:#e8eaf0;font-family:'Heebo
         <div class="panel" style="margin-top:14px;">
           <div class="panel-title">לוח מובילים</div>
           <div id="lbDiv"></div>
+          <div id="adminResetArea"></div>
         </div>
       </div>
     </div>
@@ -269,27 +271,38 @@ const ROOM = "room1";
 const TOTAL = 600;
 
 const STOCKS_DEF = [
-  {ticker:'TNUVA',name:'תנובה',price:120},
-  {ticker:'ELBIT',name:'אלביט מערכות',price:85},
-  {ticker:'ICL',  name:'כיל',price:54},
-  {ticker:'BEZQ', name:'בזק',price:37},
-  {ticker:'NICE', name:'נייס',price:200},
-  {ticker:'FIBI', name:'פועלים',price:67},
+  {ticker:'TNUVA', name:'תנובה',   price:110},
+  {ticker:'STRAUS',name:'שטראוס',  price:95},
+  {ticker:'BEZQ',  name:'בזק',     price:42},
+  {ticker:'SHUFA', name:'שופרסל',  price:78},
+  {ticker:'ELITE', name:'עלית',    price:130},
+  {ticker:'OSEM',  name:'אסם',     price:60},
 ];
 
 const NEWS = [
-  {text:'תנובה מכריזה על דיבידנד שיא — רבעון חזק',sentiment:'bullish',stock:'TNUVA',effect:.12},
-  {text:'אלביט זוכה בחוזה ביטחוני ענק עם משרד הביטחון',sentiment:'bullish',stock:'ELBIT',effect:.15},
-  {text:'מחירי האשלג מזנקים בשוק הגלובלי',sentiment:'bullish',stock:'ICL',effect:.10},
-  {text:'בזק מדווחת על ירידה חדה בלקוחות — תחרות עזה',sentiment:'bearish',stock:'BEZQ',effect:-.11},
-  {text:'NICE מאבדת עסקה אסטרטגית בארה"ב',sentiment:'bearish',stock:'NICE',effect:-.13},
-  {text:'בנק ישראל מעלה ריבית — לחץ על הבנקים',sentiment:'bearish',stock:'FIBI',effect:-.08},
-  {text:'מדד הסנטימנט הכלכלי מזנק — אופטימיות בשוק',sentiment:'bullish',stock:null,effect:.06},
-  {text:'נתוני אינפלציה גבוהים מהצפוי — שוק בלחץ',sentiment:'bearish',stock:null,effect:-.06},
-  {text:'קרן גידור זרה רוכשת מניות ישראל בהיקף עצום',sentiment:'bullish',stock:null,effect:.07},
-  {text:'חשש ממיתון: משקיעים עוברים לנזילות',sentiment:'bearish',stock:null,effect:-.07},
-  {text:'נתוני תעסוקה חיוביים — שוק העבודה חזק',sentiment:'bullish',stock:null,effect:.05},
-  {text:'מתיחות גיאופוליטית מעיבה על השווקים',sentiment:'bearish',stock:null,effect:-.08},
+  {text:'תנובה מכריזה: "החמאה חוזרת למדפים!" — התור בסופר כבר מגיע לרחוב',sentiment:'bullish',stock:'TNUVA',effect:.14},
+  {text:'סקנדל: נמצאה חבילת גבינה בתנובה שפג תוקפה ב-2019. המניה בצלילה',sentiment:'bearish',stock:'TNUVA',effect:-.12},
+  {text:'תנובה מוסיפה טעם חדש לקוטג\'— וואסאבי ובצל ירוק. הציבור מבולבל',sentiment:'neutral',stock:'TNUVA',effect:.04},
+  {text:'שטראוס מכריזה על שוקולד עם 0 קלוריות — מדענים קוראים לחקירה',sentiment:'bullish',stock:'STRAUS',effect:.13},
+  {text:'שטראוס נזכרת: "שכחנו לשים שוקולד בפרל". המניה יורדת',sentiment:'bearish',stock:'STRAUS',effect:-.11},
+  {text:'שטראוס פותחת קפה בתל אביב — תור של 3 שעות כבר ביום הראשון',sentiment:'bullish',stock:'STRAUS',effect:.09},
+  {text:'בזק מבטיחה אינטרנט מהיר לכל הארץ — כולל מרתף ההורים שלך',sentiment:'bullish',stock:'BEZQ',effect:.11},
+  {text:'40% מלקוחות בזק ניסו להתקשר לתמיכה — קיבלו מוזיקת המתנה 4 שעות',sentiment:'bearish',stock:'BEZQ',effect:-.13},
+  {text:'שופרסל מוסיפה קופות מהירות ל-5 פריטים — נתפס לקוח עם 47 פריטים',sentiment:'bearish',stock:'SHUFA',effect:-.09},
+  {text:'שופרסל אונליין: "נספק תוך שעה!" — בפועל: מחר אחרי הצהריים',sentiment:'bearish',stock:'SHUFA',effect:-.07},
+  {text:'שופרסל מכריזה על חניה חינם לשעה — פקחי עירייה כבר בדרך',sentiment:'bullish',stock:'SHUFA',effect:.08},
+  {text:'עלית מכריזה: "הבמבה לא תייקר!" — הציבור חוגג ברחובות',sentiment:'bullish',stock:'ELITE',effect:.15},
+  {text:'עלית שוקלת במבה בטעם חריף — ועדת מומחים מתכנסת בדחיפות',sentiment:'bullish',stock:'ELITE',effect:.08},
+  {text:'כמות האוויר בשקית הבמבה עולה שוב — מחאה ציבורית',sentiment:'bearish',stock:'ELITE',effect:-.10},
+  {text:'אסם מכריזה על מנה גדולה יותר בפסטה — 90% מהצרכנים מרוצים',sentiment:'bullish',stock:'OSEM',effect:.10},
+  {text:'התגלה: אסם לא ממש "תוצרת הארץ" כפי שחשבנו — ויכוח ציבורי עז',sentiment:'bearish',stock:'OSEM',effect:-.11},
+  {text:'שר האוצר: "הכלכלה במצב מצוין!" — הבורסה עולה, אף אחד לא יודע למה',sentiment:'bullish',stock:null,effect:.06},
+  {text:'חמסין כבד: כל הישראלים בבית עם מזגן — קניות אונליין בשיא',sentiment:'bullish',stock:null,effect:.07},
+  {text:'משפחה ישראלית ממוצעת מבלה 3 שעות בשבוע בפקקים — צריכת חטיפים עולה',sentiment:'bullish',stock:null,effect:.05},
+  {text:'הדולר עולה — כולם מודאגים. הדולר יורד — כולם מודאגים. כרגיל',sentiment:'bearish',stock:null,effect:-.05},
+  {text:'אזעקת שווא בבורסה — סוחרים ברחו, מחירים צנחו, הכל בסדר אחרי 10 דקות',sentiment:'bearish',stock:null,effect:-.07},
+  {text:'חגים בפתח — כולם קונים. כולם. עכשיו. הכל.',sentiment:'bullish',stock:null,effect:.08},
+  {text:'עצרת מחאה בכיכר: "יוקר המחיה!" — השוק מתרסק לרגע ומתאושש',sentiment:'bearish',stock:null,effect:-.06},
 ];
 
 /* ── local state ── */
@@ -453,6 +466,11 @@ function goTrading(){
 
   /* listen all players for LB */
   onValue(rPlayers(), snap=>{allPlayers=snap.val()||{};updateLB();});
+
+  if(isAdmin){
+    document.getElementById('adminResetArea').innerHTML=
+      `<button class="btn btn-outline btn-full" style="font-size:13px;margin-top:12px;color:var(--red);border-color:rgba(255,23,68,0.3);" onclick="resetPlayers()">🗑 אפס שחקנים ומשחק חדש</button>`;
+  }
 
   /* admin: drive timer + prices + news */
   if(isAdmin){
@@ -680,6 +698,14 @@ function loadResults(){
     location.reload();
   };
 }
+
+/* ── RESET PLAYERS ── */
+window.resetPlayers = async function(){
+  if(!confirm('לאפס את כל השחקנים ולהתחיל מחדש?'))return;
+  clearInterval(timerInt);clearInterval(priceInt);clearInterval(newsInt);
+  await remove(ref(db,ROOM));
+  location.reload();
+};
 
 /* ── INIT ── */
 async function init(){

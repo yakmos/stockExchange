@@ -133,6 +133,18 @@ html,body{min-height:100vh;background:var(--bg);color:#e8eaf0;font-family:'Heebo
 #loadingOverlay{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;z-index:999;}
 .spinner{width:36px;height:36px;border:3px solid rgba(255,214,0,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* News popup */
+.news-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;z-index:999;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.news-popup{background:var(--surface);border:2px solid var(--gold);border-radius:20px;padding:36px 40px;max-width:520px;width:90%;text-align:center;position:relative;animation:popIn .35s cubic-bezier(.34,1.56,.64,1);}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.news-popup .np-label{font-size:11px;font-family:var(--mono);letter-spacing:2px;color:var(--gold);margin-bottom:12px;}
+.news-popup .np-text{font-size:20px;font-weight:700;line-height:1.4;margin-bottom:20px;}
+.news-popup .np-effect{font-size:14px;font-family:var(--mono);margin-bottom:20px;}
+.news-popup .np-timer{font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:16px;font-family:var(--mono);}
+.news-popup .np-close{background:rgba(255,255,255,0.1);border:1px solid var(--border);color:#fff;padding:8px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-family:'Heebo',sans-serif;}
+.news-popup .np-close:hover{background:rgba(255,255,255,0.18);}
 </style>
 </head>
 <body>
@@ -195,11 +207,6 @@ html,body{min-height:100vh;background:var(--bg);color:#e8eaf0;font-family:'Heebo
       </div>
     </div>
 
-    <div class="news-bar" id="newsBar" style="display:none;">
-      <div class="news-label">⚡ BREAKING NEWS</div>
-      <div id="newsText" class="news-text neutral"></div>
-    </div>
-
     <div class="balance-bar">
       <div class="balance-card"><div class="balance-label">מזומן</div><div class="balance-value" style="color:var(--gold)" id="cashDisp">₪1,000</div></div>
       <div class="balance-card"><div class="balance-label">שווי תיק</div><div class="balance-value" id="portDisp">₪1,000</div></div>
@@ -251,6 +258,17 @@ html,body{min-height:100vh;background:var(--bg);color:#e8eaf0;font-family:'Heebo
       <button class="btn btn-gold" style="margin-top:28px;" id="restartBtn">משחק חדש</button>
     </div>
   </div>
+
+<!-- News popup -->
+<div id="newsOverlay" style="display:none;" class="news-overlay" onclick="closeNewsPopup(event)">
+  <div class="news-popup">
+    <div class="np-label">⚡ BREAKING NEWS</div>
+    <div class="np-text" id="npText"></div>
+    <div class="np-effect" id="npEffect"></div>
+    <div class="np-timer" id="npTimer"></div>
+    <button class="np-close" onclick="closeNewsPopup()">הבנתי ✓</button>
+  </div>
+</div>
 </div>
 
 <!-- Firebase -->
@@ -432,15 +450,11 @@ function goTrading(){
     renderStocks();updateBalance();updateLB();
   });
 
-  /* listen news */
+  /* listen news — show big popup */
   onValue(rNews(), snap=>{
     const n = snap.val();
-    if(n && n.ts && Date.now()-n.ts < 30000){
-      const bar=document.getElementById('newsBar');
-      const txt=document.getElementById('newsText');
-      bar.style.display='block';
-      txt.className='news-text '+n.sentiment;
-      txt.textContent=n.text;
+    if(n && n.ts && Date.now()-n.ts < 15000){
+      showNewsPopup(n);
     }
   });
 
@@ -504,22 +518,29 @@ async function adminPrices(){
   if(!stocks) return;
   const pSnap = await get(rPlayers());
   const players = pSnap.val()||{};
+  const numPlayers = Math.max(Object.keys(players).length, 1);
 
   stocks.forEach(s=>{
-    let pressure=0;
-    Object.values(players).forEach(p=>{pressure+=(p.portfolio?.[s.ticker]||0);});
-    pressure = Math.min(pressure/6,2);
-    const drift=(Math.random()-.48+pressure*.025)*.025;
-    s.price = Math.max(5, s.price*(1+drift));
-    if(!s.history)s.history=[];
+    /* count net shares held across all players */
+    let totalHeld = 0;
+    Object.values(players).forEach(p=>{ totalHeld += (p.portfolio?.[s.ticker]||0); });
+    /* net demand: positive = more buying pressure, negative = selling pressure  */
+    /* each player holding 1 share = +0.5% per tick; 20 players all holding = +10% */
+    const demandPct = (totalHeld / numPlayers) * 0.005;
+    /* tiny mean-reversion so price doesn't fly forever */
+    const reversion = (s.basePrice ? (s.basePrice - s.price) / s.basePrice * 0.002 : 0);
+    const move = demandPct + reversion;
+    s.price = Math.max(5, s.price * (1 + move));
+    if(!s.basePrice) s.basePrice = s.price;
+    if(!s.history) s.history=[];
     s.history.push(s.price);
-    if(s.history.length>40)s.history.shift();
+    if(s.history.length>40) s.history.shift();
   });
   await set(rStocks(), stocks);
 }
 
 function scheduleNews(){
-  const delay = 20000+Math.random()*35000;
+  const delay = 25000+Math.random()*30000;
   newsInt = setTimeout(async()=>{
     if(gamePhase!=='trading')return;
     const available = NEWS.filter(n=>!usedNews.includes(n.text));
@@ -527,7 +548,7 @@ function scheduleNews(){
     const ev=available[Math.floor(Math.random()*available.length)];
     usedNews.push(ev.text);
 
-    /* apply effect to stocks */
+    /* apply price effect */
     const snap = await get(rStocks());
     const stocks = snap.val();
     if(stocks){
@@ -536,11 +557,12 @@ function scheduleNews(){
           s.price = Math.max(5, s.price*(1+ev.effect));
           s.history = s.history||[];
           s.history.push(s.price);
+          if(!s.basePrice) s.basePrice = s.price;
         }
       });
       await set(rStocks(), stocks);
     }
-    await set(rNews(),{text:ev.text,sentiment:ev.sentiment,ts:Date.now()});
+    await set(rNews(),{text:ev.text,sentiment:ev.sentiment,effect:ev.effect,stock:ev.stock,ts:Date.now()});
     scheduleNews();
   }, delay);
 }
@@ -742,6 +764,39 @@ function loadResults(){
     location.reload();
   };
 }
+
+/* ── NEWS POPUP ── */
+let popupTimer = null;
+function showNewsPopup(n){
+  const overlay = document.getElementById('newsOverlay');
+  const txt = document.getElementById('npText');
+  const eff = document.getElementById('npEffect');
+  const timer = document.getElementById('npTimer');
+  if(!overlay) return;
+
+  txt.textContent = n.text;
+  const isUp = n.effect > 0;
+  const affected = n.stock || 'כל המניות';
+  eff.style.color = isUp ? 'var(--green)' : 'var(--red)';
+  eff.textContent = (isUp ? '▲ ' : '▼ ') + affected + ' ' + (isUp ? 'עולה' : 'יורדת');
+  overlay.style.display = 'flex';
+
+  let secs = 10;
+  timer.textContent = `נסגר אוטומטית בעוד ${secs} שניות`;
+  if(popupTimer) clearInterval(popupTimer);
+  popupTimer = setInterval(()=>{
+    secs--;
+    if(secs <= 0){ clearInterval(popupTimer); closeNewsPopup(); return; }
+    timer.textContent = `נסגר אוטומטית בעוד ${secs} שניות`;
+  }, 1000);
+}
+
+window.closeNewsPopup = function(e){
+  if(e && e.target !== document.getElementById('newsOverlay')) return;
+  if(popupTimer) clearInterval(popupTimer);
+  const overlay = document.getElementById('newsOverlay');
+  if(overlay) overlay.style.display = 'none';
+};
 
 /* ── RESET PLAYERS ── */
 window.resetPlayers = async function(){

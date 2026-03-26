@@ -337,10 +337,11 @@ function goWait(){
     document.getElementById('waitMsg').textContent='ממתין למנהל שיתחיל...';
   }
   onValue(rPlayers(),snap=>{refreshTeams(snap.val()||{});});
+  let uiStarted=false;
   onValue(rGame(),snap=>{
     const g=snap.val()||{};
-    if(g.phase==='playing'&&!isAdmin){startUI();}
-    if(g.phase==='ended'){goRes();}
+    if(g.phase==='playing'&&!isAdmin&&!uiStarted){uiStarted=true;startUI();}
+    if(g.phase==='ended'&&!uiStarted){goRes();}
   });
 }
 
@@ -373,7 +374,10 @@ window.startGame=async function(){
 };
 
 /* ── GAME UI ── */
+let _uiRunning=false;
 function startUI(){
+  if(_uiRunning)return;
+  _uiRunning=true;
   show('sGame'); setPill('משחק פעיל','pl');
   gameEnded=false;
 
@@ -513,7 +517,7 @@ function goRes(){
   }
 }
 
-window.resetGame=async function(){
+window.resetGame=async function(){  _uiRunning=false;
   if(!confirm('לאפס את המשחק?'))return;
   clearInterval(timerInt); clearInterval(pollInt); clearInterval(scorePollInt);
   await remove(ref(db,ROOM));

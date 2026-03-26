@@ -605,6 +605,7 @@ function goRes(){
 window.resetGame=async function(){
   _uiRunning=false; gameEnded=false;
   clearInterval(timerInt); clearInterval(pollInt); clearInterval(scorePollInt);
+  timerInt=null; pollInt=null; scorePollInt=null;
   /* reset score and game state — keep players */
   await set(rScore(),{blue:0,red:0});
   await set(rGame(),{phase:'waiting',secsLeft:gameTime,difficulty,startedAt:0});
@@ -618,7 +619,14 @@ window.resetGame=async function(){
   await set(rPlayers(),updates);
   /* reset local stats */
   mC=0; mW=0;
-  goWait();
+  /* reload page for all — cleanest way to reset all local flags */
+  /* pass identity via URL so it survives reload */
+  const sep = location.search ? '&' : '?';
+  if(myName && myTeam){
+    location.href = location.pathname + '?n=' + encodeURIComponent(myName) + '&t=' + myTeam;
+  } else {
+    location.reload();
+  }
 };
 
 window.fullReset=async function(){
@@ -630,8 +638,24 @@ window.fullReset=async function(){
 };
 
 /* ── INIT ── */
-document.getElementById('loadOv').style.display='none';
-document.getElementById('app').style.display='block';
+(async()=>{
+  document.getElementById('loadOv').style.display='none';
+  document.getElementById('app').style.display='block';
+
+  const params = new URLSearchParams(location.search);
+  const savedName = params.get('n');
+  const savedTeam = params.get('t');
+  if(savedName && (savedTeam==='blue'||savedTeam==='red')){
+    myName=savedName; myTeam=savedTeam;
+    /* clean URL without reload */
+    window.history.replaceState({}, '', location.pathname);
+    await regPlayer();
+    const snap=await get(rGame()); const g=snap.val()||{};
+    if(g.phase==='playing'){startUI();}
+    else if(g.phase==='ended'){goRes();}
+    else{goWait();}
+  }
+})();
 </script>
 </body>
 </html>

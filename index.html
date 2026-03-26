@@ -15,12 +15,10 @@
   --mono:'Share Tech Mono',monospace;
 }
 html,body{min-height:100vh;min-height:100dvh;background:var(--bg);color:#e8eaf0;font-family:'Heebo',sans-serif;direction:rtl;overflow-x:hidden;}
-
-/* ── layout ── */
-#app{max-width:480px;margin:0 auto;padding:12px 14px 60px;min-height:100dvh;}
+#app{max-width:480px;margin:0 auto;padding:12px 14px 60px;}
 .screen{display:none;}.screen.active{display:block;}
 
-/* ── header ── */
+/* header */
 .hdr{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bdr);padding-bottom:10px;margin-bottom:16px;}
 .logo{font-size:18px;font-weight:900;letter-spacing:-1px;}
 .logo .b{color:var(--blue-l);}.logo .r{color:var(--red-l);}
@@ -29,7 +27,7 @@ html,body{min-height:100vh;min-height:100dvh;background:var(--bg);color:#e8eaf0;
 .pl{background:rgba(0,230,118,.12);color:var(--green);border:1px solid rgba(0,230,118,.3);}
 .pe{background:rgba(255,23,68,.12);color:var(--red);border:1px solid rgba(255,23,68,.3);}
 
-/* ── buttons ── */
+/* buttons */
 .btn{display:block;width:100%;padding:15px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;border:none;font-family:'Heebo',sans-serif;transition:all .12s;text-align:center;margin-top:10px;-webkit-appearance:none;}
 .btn:active{transform:scale(.97);}
 .btn-gold{background:var(--gold);color:#000;}
@@ -37,15 +35,14 @@ html,body{min-height:100vh;min-height:100dvh;background:var(--bg);color:#e8eaf0;
 .btn-outline{background:transparent;color:rgba(255,255,255,.7);border:1px solid var(--bdr);}
 .btn:disabled{opacity:.35;pointer-events:none;}
 
-/* ── JOIN ── */
+/* JOIN */
 .join-card{background:var(--surf);border:1px solid var(--bdr);border-radius:18px;padding:28px 20px;text-align:center;margin-top:10px;}
 .join-card h2{font-size:26px;font-weight:900;margin-bottom:6px;}
 .join-card p{color:rgba(255,255,255,.4);font-size:14px;margin-bottom:22px;}
 .txt-in{width:100%;padding:14px;border-radius:12px;font-size:17px;background:var(--surf2);border:2px solid var(--bdr);color:#fff;font-family:'Heebo',sans-serif;text-align:center;margin-bottom:14px;outline:none;-webkit-appearance:none;transition:border .2s;}
 .txt-in:focus{border-color:var(--gold);}
-
 .team-pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
-.t-btn{padding:20px 10px;border-radius:14px;border:2px solid transparent;cursor:pointer;font-family:'Heebo',sans-serif;font-size:15px;font-weight:700;background:var(--surf2);transition:all .15s;-webkit-appearance:none;}
+.t-btn{padding:22px 10px;border-radius:14px;border:2px solid transparent;cursor:pointer;font-family:'Heebo',sans-serif;font-size:16px;font-weight:700;background:var(--surf2);transition:all .15s;-webkit-appearance:none;}
 .t-btn.blue{border-color:rgba(41,121,255,.5);color:var(--blue-l);}
 .t-btn.red {border-color:rgba(255,23,68,.5);color:var(--red-l);}
 .t-btn.blue.sel{background:var(--blue-bg);border-color:var(--blue-l);transform:scale(1.03);}
@@ -53,7 +50,7 @@ html,body{min-height:100vh;min-height:100dvh;background:var(--bg);color:#e8eaf0;
 .admin-sep{margin-top:18px;padding-top:18px;border-top:1px solid var(--bdr);text-align:center;}
 .admin-sep p{font-size:12px;color:rgba(255,255,255,.3);margin-bottom:8px;}
 
-/* ── WAITING ── */
+/* WAITING */
 .sb{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
 .tc{border-radius:14px;padding:14px;text-align:center;border:1px solid transparent;}
 .tc.blue{background:var(--blue-bg);border-color:rgba(41,121,255,.3);}
@@ -68,61 +65,44 @@ html,body{min-height:100vh;min-height:100dvh;background:var(--bg);color:#e8eaf0;
 .share-box{background:var(--surf2);border:1px solid var(--bdr);border-radius:8px;padding:9px 12px;font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.45);margin-bottom:10px;word-break:break-all;cursor:pointer;}
 .warn{font-size:13px;color:var(--gold);text-align:center;padding:8px;font-weight:700;line-height:1.4;}
 
-/* ── GAME ── */
-.timer-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.t-num{font-family:var(--mono);font-size:22px;color:var(--gold);min-width:44px;}
-.prog-tr{flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:3px;}
-.prog-fl{height:100%;border-radius:3px;transition:width .9s linear,background .5s;}
+/* GAME */
+.timer-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.t-num{font-family:var(--mono);font-size:26px;font-weight:700;min-width:52px;}
+.prog-tr{flex:1;height:7px;background:rgba(255,255,255,.08);border-radius:4px;}
+.prog-fl{height:100%;border-radius:4px;transition:width .9s linear,background .5s;}
 
-/* live score — big and clear on mobile */
-.live-score{display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:8px;margin-bottom:14px;}
+/* live score */
+.live-score{display:grid;grid-template-columns:1fr 36px 1fr;align-items:center;gap:8px;margin-bottom:16px;}
 .ls-t{text-align:center;padding:16px 8px;border-radius:14px;border:1px solid transparent;}
 .ls-t.blue{background:var(--blue-bg);border-color:rgba(41,121,255,.25);}
 .ls-t.red {background:var(--red-bg);border-color:rgba(255,23,68,.25);}
 .ls-lbl{font-size:9px;font-family:var(--mono);letter-spacing:1px;margin-bottom:4px;}
 .ls-lbl.blue{color:var(--blue-l);}.ls-lbl.red{color:var(--red-l);}
-.ls-pts{font-size:44px;font-weight:900;line-height:1;}
+.ls-pts{font-size:48px;font-weight:900;line-height:1;}
 .ls-pts.blue{color:var(--blue-l);}.ls-pts.red{color:var(--red-l);}
 .vs-txt{font-size:12px;color:rgba(255,255,255,.25);font-family:var(--mono);text-align:center;}
 
-/* stats row */
-.stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
-.s-box{background:var(--surf);border:1px solid var(--bdr);border-radius:10px;padding:10px 6px;text-align:center;}
+/* stats */
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.s-box{background:var(--surf);border:1px solid var(--bdr);border-radius:10px;padding:10px;text-align:center;}
 .s-lbl{font-size:10px;color:rgba(255,255,255,.35);margin-bottom:3px;}
-.s-val{font-size:22px;font-weight:700;font-family:var(--mono);}
+.s-val{font-size:24px;font-weight:700;font-family:var(--mono);}
 
-/* question card — hero of the screen */
-.q-card{background:var(--surf);border:2px solid var(--bdr);border-radius:18px;padding:24px 18px;text-align:center;transition:border-color .25s;}
-.q-card.correct{border-color:var(--green);}
-.q-card.wrong{border-color:var(--red);}
-.q-card.timeout{border-color:rgba(255,255,255,.15);}
-.q-lbl{font-size:10px;font-family:var(--mono);letter-spacing:1px;color:rgba(255,255,255,.35);margin-bottom:10px;}
+/* question card */
+.q-card{background:var(--surf);border:2px solid var(--bdr);border-radius:18px;padding:24px 18px 20px;text-align:center;}
+.q-lbl{font-size:10px;font-family:var(--mono);letter-spacing:1px;color:rgba(255,255,255,.35);margin-bottom:12px;}
+.q-txt{font-size:54px;font-weight:900;font-family:var(--mono);line-height:1.1;margin-bottom:24px;}
 
-/* question text — huge so readable on phone */
-.q-txt{font-size:52px;font-weight:900;font-family:var(--mono);margin-bottom:4px;line-height:1.1;}
+/* answer choices — big touch targets */
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.choice{padding:20px 8px;border-radius:14px;font-size:26px;font-weight:900;font-family:var(--mono);cursor:pointer;border:2px solid var(--bdr);background:var(--surf2);color:#fff;transition:all .12s;-webkit-appearance:none;width:100%;}
+.choice:active{transform:scale(.96);}
+.choice.correct{background:rgba(0,230,118,.2);border-color:var(--green);color:var(--green);}
+.choice.wrong{background:rgba(255,23,68,.15);border-color:var(--red);color:var(--red);}
+.choice.reveal{background:rgba(0,230,118,.1);border-color:rgba(0,230,118,.4);color:var(--green);}
+.choice:disabled{pointer-events:none;}
 
-.q-clock{font-size:28px;font-weight:900;font-family:var(--mono);margin-bottom:16px;transition:color .3s;}
-.q-clock.ok{color:var(--green);}
-.q-clock.warn{color:var(--gold);}
-.q-clock.urgent{color:var(--red);}
-
-/* answer input — large touch target */
-.ans-in{width:100%;padding:18px;border-radius:12px;font-size:32px;font-family:var(--mono);background:var(--surf2);border:2px solid var(--bdr);color:#fff;text-align:center;outline:none;-webkit-appearance:none;-moz-appearance:textfield;margin-bottom:10px;transition:border .2s;}
-.ans-in::-webkit-outer-spin-button,.ans-in::-webkit-inner-spin-button{-webkit-appearance:none;}
-.ans-in:focus{border-color:var(--gold);}
-
-.sub-btn{width:100%;padding:18px;border-radius:12px;font-size:20px;font-weight:900;cursor:pointer;border:none;font-family:'Heebo',sans-serif;transition:all .12s;-webkit-appearance:none;}
-.sub-btn:active{transform:scale(.97);}
-.sub-btn.blue{background:var(--blue);color:#fff;}
-.sub-btn.red {background:var(--red);color:#fff;}
-.sub-btn:disabled{opacity:.35;pointer-events:none;}
-
-.feedback{font-size:18px;font-weight:700;text-align:center;padding:14px;border-radius:12px;margin-top:10px;}
-.feedback.correct{background:rgba(0,230,118,.15);color:var(--green);}
-.feedback.wrong{background:rgba(255,23,68,.15);color:var(--red);}
-.feedback.timeout{background:rgba(255,255,255,.05);color:rgba(255,255,255,.4);}
-
-/* ── RESULTS ── */
+/* RESULTS */
 .res-wrap{text-align:center;padding:20px 0;}
 .win-banner{border-radius:18px;padding:28px 20px;margin-bottom:18px;border:2px solid transparent;}
 .win-banner.blue{background:var(--blue-bg);border-color:var(--blue);}
@@ -142,8 +122,6 @@ html,body{min-height:100vh;min-height:100dvh;background:var(--bg);color:#e8eaf0;
 #loadOv{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;z-index:999;}
 .spin{width:32px;height:32px;border:3px solid rgba(255,214,0,.2);border-top-color:var(--gold);border-radius:50%;animation:sp .7s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg)}}
-.pop{animation:popIn .35s cubic-bezier(.34,1.56,.64,1);}
-@keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
 </style>
 </head>
 <body>
@@ -167,8 +145,8 @@ html,body{min-height:100vh;min-height:100dvh;background:var(--bg);color:#e8eaf0;
       <p>הזן שם ובחר קבוצה</p>
       <input class="txt-in" id="nameIn" placeholder="השם שלך..." maxlength="16" autocomplete="off"/>
       <div class="team-pick">
-        <button class="t-btn blue" id="bBlue" onclick="pickTeam('blue')">🔵<br>כחולה</button>
-        <button class="t-btn red"  id="bRed"  onclick="pickTeam('red')">🔴<br>אדומה</button>
+        <button class="t-btn blue" id="bBlue" onclick="pickTeam('blue')">🔵<br/>כחולה</button>
+        <button class="t-btn red"  id="bRed"  onclick="pickTeam('red')">🔴<br/>אדומה</button>
       </div>
       <button class="btn btn-gold" id="joinBtn" onclick="joinGame()" disabled>הצטרף למשחק</button>
       <div class="admin-sep">
@@ -204,7 +182,7 @@ html,body{min-height:100vh;min-height:100dvh;background:var(--bg);color:#e8eaf0;
   <!-- GAME -->
   <div class="screen" id="sGame">
     <div class="timer-row">
-      <div class="t-num" id="tDisp">2:00</div>
+      <div class="t-num" id="tDisp" style="color:var(--gold);">2:00</div>
       <div class="prog-tr"><div class="prog-fl" id="pFill" style="width:100%;background:var(--gold);"></div></div>
     </div>
 
@@ -223,16 +201,12 @@ html,body{min-height:100vh;min-height:100dvh;background:var(--bg);color:#e8eaf0;
     <div class="stats-row">
       <div class="s-box"><div class="s-lbl">✓ נכון</div><div class="s-val" id="mC" style="color:var(--green)">0</div></div>
       <div class="s-box"><div class="s-lbl">✗ טעות</div><div class="s-val" id="mW" style="color:var(--red)">0</div></div>
-      <div class="s-box"><div class="s-lbl">⏱ פג</div><div class="s-val" id="mT" style="color:rgba(255,255,255,.35)">0</div></div>
     </div>
 
-    <div class="q-card pop" id="qCard">
-      <div class="q-lbl">פתור את התרגיל</div>
+    <div class="q-card" id="qCard">
+      <div class="q-lbl">כמה זה?</div>
       <div class="q-txt" id="qTxt">?</div>
-      <div class="q-clock ok" id="qClk">6</div>
-      <input class="ans-in" id="ansIn" type="number" inputmode="numeric" pattern="[0-9]*" placeholder="?" autocomplete="off"/>
-      <button class="sub-btn blue" id="subBtn" onclick="submitAns()">שלח ✓</button>
-      <div class="feedback" id="fb" style="display:none;"></div>
+      <div class="choices" id="choices"></div>
     </div>
   </div>
 
@@ -268,7 +242,7 @@ const fb = initializeApp({
   appId:"1:770000973719:web:89505dcdfeab8d68549ed2"
 });
 const db = getDatabase(fb);
-const ROOM = "mathbattle1";
+const ROOM = "mathbattle2";
 const TOTAL = 120;
 
 const rGame    = ()=>ref(db,`${ROOM}/game`);
@@ -277,27 +251,39 @@ const rPlayer  = n=>ref(db,`${ROOM}/players/${n}`);
 const rScore   = ()=>ref(db,`${ROOM}/score`);
 
 let myName='', myTeam='', isAdmin=false;
-let mC=0, mW=0, mT=0;
-let qSecs=0, qInt=null, timerInt=null, pollInt=null, scorePollInt=null;
-let curQ=null, answered=false;
+let mC=0, mW=0;
+let timerInt=null, pollInt=null, scorePollInt=null;
+let curQ=null, answerLocked=false;
 let gameSecsLeft=TOTAL;
 let gameEnded=false;
 
-/* ── question gen ── */
+/* ── question generator ── */
 function genQ(){
   const r=Math.random();
   let a,b,ans,txt;
   if(r<0.45){
-    a=Math.floor(Math.random()*9)+2; b=Math.floor(Math.random()*9)+2;
+    a=Math.floor(Math.random()*9)+2;
+    b=Math.floor(Math.random()*9)+2;
     ans=a*b; txt=`${a} × ${b}`;
   } else if(r<0.72){
-    a=Math.floor(Math.random()*50)+15; b=Math.floor(Math.random()*50)+15;
+    a=Math.floor(Math.random()*50)+15;
+    b=Math.floor(Math.random()*50)+15;
     ans=a+b; txt=`${a} + ${b}`;
   } else {
-    a=Math.floor(Math.random()*60)+20; b=Math.floor(Math.random()*a)+1;
+    a=Math.floor(Math.random()*60)+20;
+    b=Math.floor(Math.random()*Math.min(a-1,40))+1;
     ans=a-b; txt=`${a} - ${b}`;
   }
-  return {txt:`${txt} = ?`, ans};
+  /* generate 3 wrong answers — close but distinct */
+  const wrongs=new Set();
+  while(wrongs.size<3){
+    const delta=(Math.floor(Math.random()*8)+1)*(Math.random()<0.5?1:-1);
+    const w=ans+delta;
+    if(w!==ans && w>0) wrongs.add(w);
+  }
+  /* shuffle all 4 options */
+  const opts=[ans,...wrongs].sort(()=>Math.random()-.5);
+  return {txt:`${txt} = ?`, ans, opts};
 }
 
 /* ── helpers ── */
@@ -313,12 +299,9 @@ window.pickTeam=function(t){
   chkReady();
 };
 function chkReady(){
-  const n=document.getElementById('nameIn').value.trim();
-  document.getElementById('joinBtn').disabled=!(n&&myTeam);
+  document.getElementById('joinBtn').disabled=!(document.getElementById('nameIn').value.trim()&&myTeam);
 }
 document.getElementById('nameIn').addEventListener('input',chkReady);
-document.getElementById('nameIn').addEventListener('keypress',e=>{if(e.key==='Enter'&&!document.getElementById('joinBtn').disabled)joinGame();});
-document.getElementById('ansIn').addEventListener('keypress',e=>{if(e.key==='Enter')submitAns();});
 
 /* ── JOIN ── */
 window.joinGame=async function(){
@@ -339,7 +322,7 @@ window.joinAsAdmin=async function(){
 };
 async function regPlayer(){
   const s=await get(rPlayer(myName));
-  if(!s.exists()) await set(rPlayer(myName),{team:myTeam,correct:0,wrong:0,timeout:0,joined:Date.now()});
+  if(!s.exists()) await set(rPlayer(myName),{team:myTeam,correct:0,wrong:0,joined:Date.now()});
 }
 
 /* ── WAITING ── */
@@ -371,9 +354,15 @@ function refreshTeams(p){
   const diff=Math.abs(bl.length-rd.length);
   const w=document.getElementById('balWarn');
   const sb=document.getElementById('stBtn');
-  if(!bl.length||!rd.length){w.style.display='block';w.textContent='⚠ צריך שחקנים בשתי הקבוצות';if(sb)sb.disabled=true;}
-  else if(diff>1){w.style.display='block';w.textContent=`⚠ הפרש ${diff} — מקסימום מותר 1`;if(sb)sb.disabled=true;}
-  else{w.style.display='none';if(sb)sb.disabled=false;}
+  if(!bl.length||!rd.length){
+    w.style.display='block';w.textContent='⚠ צריך שחקנים בשתי הקבוצות';
+    if(sb)sb.disabled=true;
+  } else if(diff>1){
+    w.style.display='block';w.textContent=`⚠ הפרש ${diff} — מקסימום מותר 1`;
+    if(sb)sb.disabled=true;
+  } else {
+    w.style.display='none';if(sb)sb.disabled=false;
+  }
 }
 
 /* ── START ── */
@@ -383,28 +372,38 @@ window.startGame=async function(){
   startUI();
 };
 
-/* ── GAME ── */
+/* ── GAME UI ── */
 function startUI(){
   show('sGame'); setPill('משחק פעיל','pl');
-  document.getElementById('subBtn').className=`sub-btn ${myTeam||'blue'}`;
+  gameEnded=false;
 
-  /* admin drives global timer */
+  /* admin drives the global 2-min countdown */
   if(isAdmin){
     timerInt=setInterval(async()=>{
       const s=await get(rGame()); const g=s.val()||{};
-      if(g.phase!=='playing')return;
+      if(g.phase!=='playing'){clearInterval(timerInt);return;}
       const left=(g.secsLeft??TOTAL)-1;
-      if(left<=0){clearInterval(timerInt);await update(rGame(),{phase:'ended',secsLeft:0});return;}
+      if(left<=0){
+        clearInterval(timerInt);
+        await update(rGame(),{phase:'ended',secsLeft:0});
+        return;
+      }
       await update(rGame(),{secsLeft:left});
     },1000);
   }
 
-  /* poll game state every 2s — no onValue to avoid interfering with qInt */
+  /* poll game state every 2s — completely separate from question logic */
   pollInt=setInterval(async()=>{
     const s=await get(rGame()); const g=s.val()||{};
     gameSecsLeft=g.secsLeft??TOTAL;
     updateTimerUI();
-    if(g.phase==='ended'&&!gameEnded){gameEnded=true;endGame();}
+    if(g.phase==='ended'&&!gameEnded){
+      gameEnded=true;
+      clearInterval(pollInt);
+      clearInterval(timerInt);
+      clearInterval(scorePollInt);
+      goRes();
+    }
   },2000);
 
   /* poll score every 2s */
@@ -419,90 +418,61 @@ function startUI(){
 
 function updateTimerUI(){
   const m=Math.floor(gameSecsLeft/60),s=gameSecsLeft%60;
-  document.getElementById('tDisp').textContent=`${m}:${String(s).padStart(2,'0')}`;
+  const disp=document.getElementById('tDisp');
+  disp.textContent=`${m}:${String(s).padStart(2,'0')}`;
+  disp.style.color=gameSecsLeft<=30?'var(--red)':gameSecsLeft<=60?'var(--gold)':'var(--green)';
   const pct=(gameSecsLeft/TOTAL)*100;
   const f=document.getElementById('pFill');
   f.style.width=pct+'%';
-  f.style.background=pct>30?'var(--gold)':'var(--red)';
+  f.style.background=pct>50?'var(--green)':pct>25?'var(--gold)':'var(--red)';
 }
 
-function endGame(){
-  clearInterval(qInt); clearInterval(timerInt);
-  clearInterval(pollInt); clearInterval(scorePollInt);
-  goRes();
-}
-
-/* ── QUESTION ── */
+/* ── QUESTION — no timer, just 4 buttons ── */
 function nextQ(){
   if(gameEnded)return;
-  curQ=genQ(); answered=false; qSecs=6;
-
-  const card=document.getElementById('qCard');
-  card.className='q-card pop';
+  curQ=genQ();
+  answerLocked=false;
 
   document.getElementById('qTxt').textContent=curQ.txt;
-  document.getElementById('ansIn').value='';
-  document.getElementById('ansIn').disabled=false;
-  document.getElementById('subBtn').disabled=false;
-  document.getElementById('fb').style.display='none';
-  updateQClk();
 
-  if(qInt)clearInterval(qInt);
-  qInt=setInterval(()=>{
-    if(gameEnded){clearInterval(qInt);return;}
-    qSecs--;
-    updateQClk();
-    if(qSecs<=0){clearInterval(qInt);handleTimeout();}
-  },1000);
-
-  /* focus after tiny delay so keyboard doesn't shift layout weirdly */
-  setTimeout(()=>{
-    if(!answered) document.getElementById('ansIn').focus();
-  },150);
+  const container=document.getElementById('choices');
+  container.innerHTML='';
+  curQ.opts.forEach(opt=>{
+    const btn=document.createElement('button');
+    btn.className='choice';
+    btn.textContent=opt;
+    btn.onclick=()=>handleChoice(btn,opt);
+    container.appendChild(btn);
+  });
 }
 
-function updateQClk(){
-  const el=document.getElementById('qClk');
-  el.textContent=qSecs;
-  el.className=qSecs<=2?'q-clock urgent':qSecs<=4?'q-clock warn':'q-clock ok';
-}
+function handleChoice(btn,val){
+  if(answerLocked||gameEnded)return;
+  answerLocked=true;
 
-window.submitAns=function(){
-  if(answered||gameEnded)return;
-  const v=parseInt(document.getElementById('ansIn').value);
-  if(isNaN(v))return;
-  clearInterval(qInt);
-  answered=true;
-  document.getElementById('ansIn').disabled=true;
-  document.getElementById('subBtn').disabled=true;
+  /* disable all buttons */
+  document.querySelectorAll('.choice').forEach(b=>b.disabled=true);
 
-  if(v===curQ.ans){
-    mC++; showFb('correct',`✓ נכון! +1 לקבוצה`);
-    addScore(myTeam,1); update(rPlayer(myName),{correct:mC});
+  if(val===curQ.ans){
+    btn.classList.add('correct');
+    mC++;
+    document.getElementById('mC').textContent=mC;
+    addScore(myTeam,1);
+    update(rPlayer(myName),{correct:mC});
   } else {
-    mW++; showFb('wrong',`✗ טעות! התשובה: ${curQ.ans} | -1`);
-    addScore(myTeam,-1); update(rPlayer(myName),{wrong:mW});
+    btn.classList.add('wrong');
+    /* reveal correct answer */
+    document.querySelectorAll('.choice').forEach(b=>{
+      if(parseInt(b.textContent)===curQ.ans) b.classList.add('reveal');
+    });
+    mW++;
+    document.getElementById('mW').textContent=mW;
+    addScore(myTeam,-1);
+    update(rPlayer(myName),{wrong:mW});
   }
-  document.getElementById('mC').textContent=mC;
-  document.getElementById('mW').textContent=mW;
-  setTimeout(nextQ,1800);
-};
 
-function handleTimeout(){
-  if(answered||gameEnded)return;
-  answered=true;
-  document.getElementById('ansIn').disabled=true;
-  document.getElementById('subBtn').disabled=true;
-  mT++; showFb('timeout',`⏱ פג הזמן! התשובה: ${curQ.ans}`);
-  document.getElementById('mT').textContent=mT;
-  update(rPlayer(myName),{timeout:mT});
-  setTimeout(nextQ,1800);
-}
-
-function showFb(type,msg){
-  const fb=document.getElementById('fb');
-  fb.className=`feedback ${type}`; fb.textContent=msg; fb.style.display='block';
-  document.getElementById('qCard').className=`q-card ${type}`;
+  /* short pause so player sees result, then next question */
+  setTimeout(nextQ, 900);
 }
 
 async function addScore(team,delta){
@@ -514,8 +484,7 @@ async function addScore(team,delta){
 
 /* ── RESULTS ── */
 function goRes(){
-  clearInterval(qInt); clearInterval(timerInt);
-  clearInterval(pollInt); clearInterval(scorePollInt);
+  clearInterval(timerInt); clearInterval(pollInt); clearInterval(scorePollInt);
   show('sRes'); setPill('נגמר','pe');
 
   get(rScore()).then(s=>{
@@ -526,9 +495,16 @@ function goRes(){
     const e=document.getElementById('winEmoji');
     const t=document.getElementById('winTitle');
     const u=document.getElementById('winSub');
-    if(sc.blue>sc.red){b.className='win-banner blue';e.textContent='🔵🏆';t.textContent='קבוצה כחולה ניצחה!';u.textContent=`${sc.blue} מול ${sc.red} נקודות`;}
-    else if(sc.red>sc.blue){b.className='win-banner red';e.textContent='🔴🏆';t.textContent='קבוצה אדומה ניצחה!';u.textContent=`${sc.red} מול ${sc.blue} נקודות`;}
-    else{b.className='win-banner tie';e.textContent='🤝';t.textContent='תיקו!';u.textContent=`${sc.blue} נקודות לכל קבוצה`;}
+    if(sc.blue>sc.red){
+      b.className='win-banner blue';e.textContent='🔵🏆';
+      t.textContent='קבוצה כחולה ניצחה!';u.textContent=`${sc.blue} מול ${sc.red} נקודות`;
+    } else if(sc.red>sc.blue){
+      b.className='win-banner red';e.textContent='🔴🏆';
+      t.textContent='קבוצה אדומה ניצחה!';u.textContent=`${sc.red} מול ${sc.blue} נקודות`;
+    } else {
+      b.className='win-banner tie';e.textContent='🤝';
+      t.textContent='תיקו!';u.textContent=`${sc.blue} נקודות לכל קבוצה`;
+    }
   });
 
   if(isAdmin){
@@ -539,17 +515,14 @@ function goRes(){
 
 window.resetGame=async function(){
   if(!confirm('לאפס את המשחק?'))return;
-  clearInterval(qInt); clearInterval(timerInt);
-  clearInterval(pollInt); clearInterval(scorePollInt);
+  clearInterval(timerInt); clearInterval(pollInt); clearInterval(scorePollInt);
   await remove(ref(db,ROOM));
   location.reload();
 };
 
 /* ── INIT ── */
-(async()=>{
-  document.getElementById('loadOv').style.display='none';
-  document.getElementById('app').style.display='block';
-})();
+document.getElementById('loadOv').style.display='none';
+document.getElementById('app').style.display='block';
 </script>
 </body>
 </html>

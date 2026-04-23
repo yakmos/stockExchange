@@ -272,7 +272,8 @@ window.joinGroup = async () => {
     try {
         const snap = await get(ref(db, getDbPath(code)));
         if (!snap.exists()) { showLobbyError('קבוצה לא נמצאה. בדוק את הקוד.'); return; }
-        enterApp(code, snap.val().adminPassword || null);
+    // קבוצת YAKIR — ברירת מחדל 1946 אם adminPassword לא שמור ב-Firebase
+    enterApp(code, snap.val().adminPassword || (code === 'YAKIR' ? '1946' : null));
     } catch(e) { showLobbyError('שגיאת חיבור. נסה שוב.'); }
 };
 
@@ -305,7 +306,7 @@ function enterApp(code, adminPass) {
         const data = snap.val() || {};
         window.players = data.players || [];
         window.physicalCash = data.physicalCash || 0;
-        groupAdminPass = data.adminPassword || groupAdminPass;
+        groupAdminPass = data.adminPassword || (currentGroupCode === 'YAKIR' ? '1946' : groupAdminPass);
         render();
         if (!window._scaleHandled) handleBatchFromUrl();
     });

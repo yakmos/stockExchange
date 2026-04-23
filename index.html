@@ -738,7 +738,7 @@ function renderSessions(isAdmin) {
                     <div class="session-date">📅 ${dateStr}</div>
                     <div class="session-meta">${timeStr} · ${sess.players.length} שחקנים</div>
                 </div>
-                <div class="session-pot ${totalProfit >= 0 ? 'positive' : 'negative'}">₪${totalPot}</div>
+                <div class="session-pot" style="color:var(--casino-gold);">₪${totalPot}</div>
             </div>
             <div class="session-body">
                 ${playersHtml}

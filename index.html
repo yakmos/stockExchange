@@ -840,7 +840,7 @@ function render() {
 
     // Leaderboard
     const sorted = [...window.players].sort((a,b) => b.lifetime - a.lifetime);
-    const visible = sorted.filter(p => isAdmin || p.lifetime >= 0);
+    const visible = sorted;
     document.getElementById('leaderboardList').innerHTML = visible.map((p, i) => `
         <div class="player-card" style="padding:15px;margin-bottom:8px;">
             <div style="display:flex;justify-content:space-between;align-items:center;">

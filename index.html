@@ -364,9 +364,26 @@ document.getElementById('newGroupViewPass').addEventListener('keydown', e => { i
 const savedGroup = sessionStorage.getItem('pokerGroup');
 const savedPass  = sessionStorage.getItem('pokerPass');
 if (savedGroup && savedPass) {
-    document.getElementById('joinCode').value = savedGroup;
-    document.getElementById('joinPass').value = savedPass;
-    window.joinGroup();
+    // בודק מחדש מול Firebase (לא סומך עיוור על sessionStorage)
+    get(ref(db, getDbPath(savedGroup))).then(snap => {
+        if (!snap.exists()) { sessionStorage.removeItem('pokerGroup'); sessionStorage.removeItem('pokerPass'); return; }
+        const data = snap.val();
+        const adminPass = data.adminPassword || (savedGroup === 'YAKIR' ? '1946' : null);
+        const viewPass  = data.viewPassword  || (savedGroup === 'YAKIR' ? '1946' : null);
+        if (savedPass === adminPass) {
+            document.getElementById('joinCode').value = savedGroup;
+            document.getElementById('joinPass').value = savedPass;
+            enterApp(savedGroup, adminPass, viewPass, true);
+        } else if (viewPass && savedPass === viewPass) {
+            document.getElementById('joinCode').value = savedGroup;
+            document.getElementById('joinPass').value = savedPass;
+            enterApp(savedGroup, adminPass, viewPass, false);
+        } else {
+            // הסיסמה השמורה כבר לא תקפה — חוזרים ללובי
+            sessionStorage.removeItem('pokerGroup');
+            sessionStorage.removeItem('pokerPass');
+        }
+    }).catch(() => {});
 }
 
 // ── Card Parser ──

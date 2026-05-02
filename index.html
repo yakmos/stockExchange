@@ -62,35 +62,14 @@
         #chartContainer { width: 100%; height: 300px; margin-top: 20px; background: rgba(255,255,255,0.02); border-radius: 15px; padding: 10px; }
 
         /* ── SESSION HISTORY STYLES ── */
-        .session-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(255,255,255,0.06);
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-        }
-        .session-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 16px;
-            background: rgba(0,0,0,0.3);
-            cursor: pointer;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .session-card { background: var(--card-bg); border-radius: 16px; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.06); overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+        .session-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: rgba(0,0,0,0.3); cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .session-date { font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 1rem; color: var(--casino-gold); }
         .session-meta { font-size: 0.75rem; color: #888; margin-top: 2px; }
         .session-pot { font-family: 'Rubik', sans-serif; font-size: 1.3rem; font-weight: 900; }
         .session-body { padding: 14px 16px; display: none; }
         .session-body.open { display: block; }
-        .session-player-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .session-player-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .session-player-row:last-child { border-bottom: none; }
         .session-player-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
         .session-player-detail { font-size: 0.75rem; color: #888; line-height: 1.6; }
@@ -98,6 +77,60 @@
         .session-profit { font-family: 'Rubik', sans-serif; font-size: 1.1rem; font-weight: 900; text-align: left; white-space: nowrap; }
         .delete-session-btn { display: block; width: 100%; margin-top: 12px; padding: 8px; background: transparent; border: 1px solid rgba(230,57,70,0.3); color: var(--poker-red); border-radius: 8px; font-size: 0.8rem; cursor: pointer; }
         .session-total-row { display: flex; justify-content: space-between; padding: 10px 0 4px; font-size: 0.8rem; color: #888; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 6px; }
+
+        /* ══ LEADERBOARD EXPANDABLE CARDS ══ */
+        .lb-card { background: var(--card-bg); border-radius: 18px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.06); overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.35); transition: border-color 0.2s; }
+        .lb-card.expanded { border-color: rgba(212,175,55,0.35); }
+        .lb-main { display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer; user-select: none; }
+        .lb-main:active { background: rgba(255,255,255,0.02); }
+        .lb-rank { font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 1.1rem; color: var(--casino-gold); min-width: 28px; text-align: center; }
+        .lb-rank.gold   { color: #FFD700; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+        .lb-rank.silver { color: #C0C0C0; }
+        .lb-rank.bronze { color: #CD7F32; }
+        .lb-avatar-wrap { width: 40px; height: 40px; flex-shrink: 0; }
+        .lb-avatar-inner { width: 40px; height: 40px; border-radius: 50%; background: #000; border: 2px solid var(--casino-gold); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .lb-avatar-cards { position: relative; width: 32px; height: 28px; }
+        .lb-mini-card { position: absolute; width: 20px; height: 30px; background: #fff; border-radius: 3px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Rubik'; font-weight: 900; box-shadow: 2px 2px 6px rgba(0,0,0,0.6); border: 1px solid #ccc; }
+        .lb-card-val { font-size: 9px; line-height: 1; }
+        .lb-card-suit { font-size: 8px; line-height: 1; }
+        .lb-c1 { transform: rotate(-12deg); left: 0; z-index: 1; }
+        .lb-c2 { transform: rotate(12deg); right: 0; z-index: 2; top: 2px; }
+        .lb-name-wrap { flex: 1; min-width: 0; }
+        .lb-name { font-weight: 900; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; }
+        .trend-badge { font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 20px; letter-spacing: 0.5px; flex-shrink: 0; }
+        .trend-up   { background: rgba(74,222,128,0.15); color: var(--poker-green); border: 1px solid rgba(74,222,128,0.3); }
+        .trend-down { background: rgba(230,57,70,0.15);  color: var(--poker-red);   border: 1px solid rgba(230,57,70,0.3); }
+        .trend-neutral { background: rgba(255,255,255,0.07); color: #888; border: 1px solid rgba(255,255,255,0.1); }
+        .lb-sessions-mini { font-size: 0.72rem; color: #666; margin-top: 1px; }
+        .lb-profit { font-family: 'Rubik', sans-serif; font-size: 1.2rem; font-weight: 900; text-align: left; direction: ltr; unicode-bidi: isolate; flex-shrink: 0; }
+        .lb-chevron { font-size: 0.75rem; color: #555; transition: transform 0.25s; flex-shrink: 0; margin-right: 4px; }
+        .lb-card.expanded .lb-chevron { transform: rotate(180deg); color: var(--casino-gold); }
+        .lb-expand { display: none; padding: 0 16px 16px; animation: lbSlideDown 0.22s ease; }
+        .lb-card.expanded .lb-expand { display: block; }
+        @keyframes lbSlideDown { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+        .lb-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); margin-bottom: 14px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+        .stat-tile { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 10px 8px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .stat-tile .stat-label { font-size: 0.62rem; color: #666; display: block; margin-bottom: 4px; white-space: nowrap; }
+        .stat-tile .stat-val { font-family: 'Rubik', sans-serif; font-size: 1rem; font-weight: 900; color: #fff; }
+        .stat-tile .stat-val.accent { color: var(--casino-gold); }
+        .stat-tile.wide { grid-column: span 3; display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; }
+        .stat-tile.wide .stat-label { margin-bottom: 0; font-size: 0.7rem; }
+        .stat-tile.wide .stat-val { font-size: 0.95rem; }
+        .streak-row { display: flex; align-items: center; gap: 5px; margin-bottom: 12px; padding: 8px 12px; background: rgba(0,0,0,0.2); border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); }
+        .streak-label { font-size: 0.72rem; color: #666; flex-shrink: 0; }
+        .streak-dots { display: flex; gap: 4px; flex-wrap: wrap; }
+        .streak-dot { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 900; }
+        .streak-dot.w { background: rgba(74,222,128,0.25); color: var(--poker-green); border: 1px solid rgba(74,222,128,0.4); }
+        .streak-dot.l { background: rgba(230,57,70,0.2);  color: var(--poker-red);   border: 1px solid rgba(230,57,70,0.3); }
+        .records-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .record-tile { background: rgba(0,0,0,0.25); border-radius: 10px; padding: 9px 12px; border: 1px solid rgba(255,255,255,0.04); }
+        .record-tile .rec-label { font-size: 0.62rem; color: #666; display: block; margin-bottom: 3px; }
+        .record-tile .rec-val { font-family: 'Rubik', sans-serif; font-size: 1.05rem; font-weight: 900; }
+        .record-tile .rec-date { font-size: 0.62rem; color: #555; margin-top: 2px; }
+        .lb-admin-row { display: flex; gap: 6px; margin-top: 12px; }
+        .lb-admin-btn { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #888; padding: 8px; border-radius: 8px; font-size: 0.78rem; cursor: pointer; transition: all 0.15s; font-family: 'Heebo', sans-serif; }
+        .lb-admin-btn:hover { background: rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.3); color: var(--casino-gold); }
     </style>
 </head>
 <body id="mainBody">
@@ -105,22 +138,17 @@
 <!-- ══ מסך כניסה / יצירת קבוצה ══ -->
 <div id="lobbyScreen" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;">
   <div style="width:100%;max-width:420px;">
-    <!-- לוגו -->
     <div style="text-align:center;margin-bottom:36px;">
       <div style="font-size:2.8rem;margin-bottom:8px;">🃏</div>
       <h1 style="font-family:'Rubik',sans-serif;font-weight:900;font-size:2rem;background:var(--gold-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase;letter-spacing:2px;">Poker Tracker</h1>
       <p style="color:#888;font-size:0.85rem;margin-top:6px;">נהל את קבוצת הפוקר שלך</p>
     </div>
-
-    <!-- כניסה לקבוצה קיימת -->
     <div style="background:var(--card-bg);border-radius:20px;padding:24px;margin-bottom:16px;border:1px solid rgba(212,175,55,0.2);">
       <h3 style="color:var(--casino-gold);margin-bottom:16px;font-size:1rem;">🔑 כניסה לקבוצה קיימת</h3>
       <input type="text" id="joinCode" class="form-input" placeholder="קוד קבוצה (למשל: YAKIR)" style="text-transform:uppercase;letter-spacing:2px;">
       <input type="password" id="joinPass" class="form-input" placeholder="סיסמה (מנהל או משתמש)">
       <button class="btn-gold" style="width:100%;padding:14px;" onclick="window.joinGroup()">כנס לקבוצה ←</button>
     </div>
-
-    <!-- יצירת קבוצה חדשה -->
     <div style="background:var(--card-bg);border-radius:20px;padding:24px;border:1px solid rgba(255,255,255,0.05);">
       <h3 style="color:#aaa;margin-bottom:16px;font-size:1rem;">✨ צור קבוצה חדשה</h3>
       <input type="text" id="newGroupCode" class="form-input" placeholder="קוד קבוצה (אנגלית/מספרים)" style="text-transform:uppercase;letter-spacing:2px;">
@@ -128,7 +156,6 @@
       <input type="password" id="newGroupViewPass" class="form-input" placeholder="סיסמת צפייה (לחברים)">
       <button class="btn-dark" style="width:100%;padding:14px;background:rgba(212,175,55,0.1);border-color:rgba(212,175,55,0.3);color:var(--casino-gold);" onclick="window.createGroup()">צור קבוצה +</button>
     </div>
-
     <p id="lobbyError" style="color:var(--poker-red);text-align:center;margin-top:16px;font-size:0.9rem;min-height:20px;"></p>
   </div>
 </div>
@@ -245,12 +272,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// ── מצב קבוצה ──
-let currentGroupCode = null;   // קוד הקבוצה הפעיל
-let groupAdminPass = null;     // סיסמת המנהל
-let groupViewPass  = null;     // סיסמת הצפייה
-let dbRef = null;              // ה-ref הפעיל
-let currentListener = null;   // ה-onValue listener הפעיל
+let currentGroupCode = null;
+let groupAdminPass = null;
+let groupViewPass  = null;
+let dbRef = null;
+let currentListener = null;
 
 window.players = [];
 window.physicalCash = 0;
@@ -262,7 +288,6 @@ const SESSION_GAP_MS = 12 * 60 * 60 * 1000;
 // לוגיקת קבוצות
 // ══════════════════════════════════════════
 
-// קבוצת יקיר הקיימת ממופה ל-poker_v2 לשמירת נתונים
 function getDbPath(code) {
     if (code.toUpperCase() === 'YAKIR') return 'poker_v2';
     return 'groups/' + code.toUpperCase();
@@ -281,9 +306,9 @@ window.joinGroup = async () => {
         const adminPass = String(data.adminPassword ?? (code === 'YAKIR' ? '1946' : ''));
         const viewPass  = String(data.viewPassword  ?? (code === 'YAKIR' ? '1946' : ''));
         if (pass === adminPass) {
-            enterApp(code, adminPass, viewPass, true);   // מנהל
+            enterApp(code, adminPass, viewPass, true);
         } else if (viewPass && pass === viewPass) {
-            enterApp(code, adminPass, viewPass, false);  // צפייה בלבד
+            enterApp(code, adminPass, viewPass, false);
         } else {
             showLobbyError('סיסמה שגויה');
         }
@@ -309,17 +334,12 @@ window.createGroup = async () => {
     } catch(e) { showLobbyError('שגיאת חיבור. נסה שוב.'); }
 };
 
-// isAdmin = האם הנכנס הוא מנהל
 function enterApp(code, adminPass, viewPass, isAdmin) {
     currentGroupCode = code;
     groupAdminPass = adminPass;
     groupViewPass  = viewPass;
-
-    // שמירה ב-sessionStorage — שמירת סוג הכניסה
     sessionStorage.setItem('pokerGroup', code);
     sessionStorage.setItem('pokerPass', isAdmin ? adminPass : viewPass);
-
-    // הפעלת ה-listener
     if (currentListener && dbRef) off(dbRef);
     dbRef = ref(db, getDbPath(code));
     currentListener = onValue(dbRef, (snap) => {
@@ -331,8 +351,6 @@ function enterApp(code, adminPass, viewPass, isAdmin) {
         render();
         if (!window._scaleHandled) handleBatchFromUrl();
     });
-
-    // עדכון UI
     document.getElementById('lobbyScreen').style.display = 'none';
     document.getElementById('appScreen').style.display = 'block';
     document.getElementById('groupNameDisplay').innerText = '📍 ' + code + (isAdmin ? ' · מנהל 👑' : ' · צופה 👁️');
@@ -354,20 +372,15 @@ window.leaveGroup = () => {
     showLobbyError('');
 };
 
-function showLobbyError(msg) {
-    document.getElementById('lobbyError').innerText = msg;
-}
+function showLobbyError(msg) { document.getElementById('lobbyError').innerText = msg; }
 
-// ── Enter on input ──
 document.getElementById('joinCode').addEventListener('keydown', e => { if(e.key==='Enter') window.joinGroup(); });
 document.getElementById('joinPass').addEventListener('keydown', e => { if(e.key==='Enter') window.joinGroup(); });
 document.getElementById('newGroupViewPass').addEventListener('keydown', e => { if(e.key==='Enter') window.createGroup(); });
 
-// ── Auto-restore session ──
 const savedGroup = sessionStorage.getItem('pokerGroup');
 const savedPass  = sessionStorage.getItem('pokerPass');
 if (savedGroup && savedPass) {
-    // בודק מחדש מול Firebase (לא סומך עיוור על sessionStorage)
     get(ref(db, getDbPath(savedGroup))).then(snap => {
         if (!snap.exists()) { sessionStorage.removeItem('pokerGroup'); sessionStorage.removeItem('pokerPass'); return; }
         const data = snap.val();
@@ -382,7 +395,6 @@ if (savedGroup && savedPass) {
             document.getElementById('joinPass').value = savedPass;
             enterApp(savedGroup, adminPass, viewPass, false);
         } else {
-            // הסיסמה השמורה כבר לא תקפה — חוזרים ללובי
             sessionStorage.removeItem('pokerGroup');
             sessionStorage.removeItem('pokerPass');
         }
@@ -406,14 +418,23 @@ const getAvatarHtml = (cardsStr) => {
     return `<div class="avatar-cards"><div class="mini-card c1" style="color:${c1.color}"><span class="card-val">${c1.val}</span><span class="card-suit">${c1.suit}</span></div><div class="mini-card c2" style="color:${c2.color}"><span class="card-val">${c2.val}</span><span class="card-suit">${c2.suit}</span></div></div>`;
 };
 
+// ── Leaderboard avatar (קטן יותר) ──
+const getLbAvatarHtml = (cardsStr) => {
+    const cards = (cardsStr || "??").match(/([2-9TJQKA]|10)([hdscl])?/gi) || ["?", "?"];
+    const c1 = parseCard(cards[0] || "?");
+    const c2 = parseCard(cards[1] || cards[0] || "?");
+    return `<div class="lb-avatar-cards">
+        <div class="lb-mini-card lb-c1" style="color:${c1.color}"><span class="lb-card-val">${c1.val}</span><span class="lb-card-suit">${c1.suit}</span></div>
+        <div class="lb-mini-card lb-c2" style="color:${c2.color}"><span class="lb-card-val">${c2.val}</span><span class="lb-card-suit">${c2.suit}</span></div>
+    </div>`;
+};
+
 // ── Utils ──
 const formatTime = (ts) => new Date(ts).toLocaleTimeString('he-IL', {hour:'2-digit', minute:'2-digit'});
 const formatDate = (ts) => new Date(ts).toLocaleDateString('he-IL', {day:'2-digit', month:'2-digit', year:'2-digit'});
 
 // ── Session grouping ──
-// בונה מערך ערבים מתוך history של השחקנים
 function buildSessions(players) {
-    // אוסף את כל הcashout events מכל השחקנים
     const events = [];
     for (const p of players) {
         if (!p.history) continue;
@@ -421,11 +442,8 @@ function buildSessions(players) {
             events.push({ ...h, playerName: p.name, playerId: p.id });
         }
     }
-    // ממיין לפי זמן
     events.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
     if (events.length === 0) return [];
-
-    // מקבץ לערבים לפי gap של 12 שעות
     const sessions = [];
     let current = { events: [events[0]], startTs: events[0].timestamp || 0 };
     for (let i = 1; i < events.length; i++) {
@@ -439,8 +457,6 @@ function buildSessions(players) {
         }
     }
     sessions.push(current);
-
-    // לכל ערב בונה סיכום לפי שחקן
     return sessions.map((sess, idx) => {
         const byPlayer = {};
         for (const e of sess.events) {
@@ -454,7 +470,7 @@ function buildSessions(players) {
         const totalPot = players.reduce((s, p) => s + p.invested, 0);
         const lastTs = Math.max(...sess.events.map(e => e.timestamp || 0));
         return { id: `sess_${idx}`, startTs: sess.startTs, lastTs, players, totalPot, eventCount: sess.events.length };
-    }).reverse(); // הכי חדש ראשון
+    }).reverse();
 }
 
 // ── Admin ──
@@ -576,31 +592,19 @@ window.confirmCashout = async () => {
     const cashHandled = parseInt(document.getElementById('coCash').value) || 0;
     const p = window.players.find(x => x.id === currentId);
     if (!p) return;
-
     const profit = amt - p.currentInv;
     p.lifetime = (p.lifetime || 0) + profit;
-
     let digitalProfit = profit;
     if (profit < 0) { digitalProfit += cashHandled; window.physicalCash += cashHandled; }
     else if (profit > 0) { digitalProfit -= cashHandled; window.physicalCash -= cashHandled; }
     p.sessionBalance = (p.sessionBalance || 0) + digitalProfit;
-
     if (!p.history) p.history = [];
     p.history.push({
         date: new Date().toLocaleDateString('he-IL', {day:'2-digit', month:'2-digit'}),
-        profit,
-        invested: p.currentInv,
-        cashedOut: amt,
-        timestamp: Date.now(),
-        rebuys: p.rebuys,
-        rebuyLog: p.rebuyLog || []
+        profit, invested: p.currentInv, cashedOut: amt,
+        timestamp: Date.now(), rebuys: p.rebuys, rebuyLog: p.rebuyLog || []
     });
-
-    p.active = false;
-    p.currentInv = 0;
-    p.rebuys = 0;
-    p.rebuyLog = [];
-
+    p.active = false; p.currentInv = 0; p.rebuys = 0; p.rebuyLog = [];
     await save();
     window.closeModal();
 };
@@ -608,23 +612,15 @@ window.confirmCashout = async () => {
 // ── מחיקת ערב ──
 window.deleteSession = async (sessionIdx, playerNames) => {
     if (!confirm(`למחוק ערב זה? כל הנתונים של ${playerNames.join(', ')} מאותו ערב יימחקו מה-Leaderboard והגרפים.`)) return;
-
-    // בונים מחדש את הסשנים כדי לדעת אילו timestamps למחוק
     const sessions = buildSessions(window.players);
     const sess = sessions[sessionIdx];
     if (!sess) return;
-
     const tsSet = new Set(sess.players.flatMap(sp => sp.cashouts.map(c => c.timestamp)));
-
-    // מוחקים את הרשומות האלו מה-history של כל שחקן
     for (const p of window.players) {
         if (!p.history) continue;
         const before = p.history.length;
         p.history = p.history.filter(h => !tsSet.has(h.timestamp));
-        // מעדכנים lifetime
-        const removed = p.history.length < before;
-        if (removed) {
-            // מחשבים מחדש lifetime מה-history שנשאר
+        if (p.history.length < before) {
             p.lifetime = p.history.reduce((s, h) => s + (h.profit || 0), 0);
         }
     }
@@ -741,8 +737,6 @@ window.openPlayerChart = (id) => {
 
 window.closeModal = () => document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
 
-// ── Firebase Sync מופעל ב-enterApp ──
-
 async function save() { await update(dbRef, { players: window.players, physicalCash: window.physicalCash }); }
 
 // ── Batch from scale ──
@@ -802,6 +796,48 @@ function handleBatchFromUrl() {
     });
 }
 
+// ══════════════════════════════════════════
+// LEADERBOARD — חישוב סטטיסטיקות
+// ══════════════════════════════════════════
+function calcPlayerStats(p) {
+    const h = p.history || [];
+    const sessions = h.length;
+    if (sessions === 0) return null;
+
+    // 1. ROI
+    const totalInvested = h.reduce((s, e) => s + (e.invested || 0), 0);
+    const roi = totalInvested > 0 ? Math.round((p.lifetime / totalInvested) * 100) : 0;
+
+    // 2+3. ערבים + ממוצע
+    const avgPerSession = Math.round(p.lifetime / sessions);
+
+    // 4. רצף W/L
+    const sorted = [...h].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+    const wl = sorted.map(e => e.profit >= 0 ? 'w' : 'l');
+    let streak = 1;
+    const streakType = wl[wl.length - 1];
+    for (let i = wl.length - 2; i >= 0; i--) {
+        if (wl[i] === streakType) streak++;
+        else break;
+    }
+
+    // 5. Best / Worst
+    const best  = sorted.reduce((b, e) => e.profit > b.profit ? e : b, sorted[0]);
+    const worst = sorted.reduce((b, e) => e.profit < b.profit ? e : b, sorted[0]);
+
+    // מגמה
+    let trend = 'neutral';
+    if (wl.length >= 1) trend = wl[wl.length - 1] === 'w' ? 'up' : 'down';
+
+    return { sessions, roi, avgPerSession, streak, streakType, wl, best, worst, trend, totalInvested };
+}
+
+// ── Toggle leaderboard card ──
+window.toggleLbCard = (id) => {
+    const card = document.getElementById('lbcard_' + id);
+    if (card) card.classList.toggle('expanded');
+};
+
 // ── Render ──
 function render() {
     const isAdmin = document.getElementById('mainBody').classList.contains('is-admin');
@@ -838,23 +874,107 @@ function render() {
             </div>
         </div>`).join('');
 
-    // Leaderboard
-    const sorted = [...window.players].sort((a,b) => b.lifetime - a.lifetime);
-    const visible = sorted;
-    document.getElementById('leaderboardList').innerHTML = visible.map((p, i) => `
-        <div class="player-card" style="padding:15px;margin-bottom:8px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-                <div style="display:flex;align-items:center;gap:10px;">
-                    <span style="color:var(--casino-gold);font-weight:900;">#${i+1}</span>
-                    <div class="avatar" style="width:35px;height:35px;transform:scale(0.6)">${getAvatarHtml(p.cards||"??")}</div>
-                    <span style="font-weight:700;">${p.name}</span>
-                    <button class="icon-btn" onclick="window.openPlayerChart(${p.id})">📈</button>
-                    ${isAdmin ? `<button class="icon-btn" onclick="window.openHistoryEditor(${p.id})">📝</button>` : ''}
-                    ${isAdmin ? `<button class="icon-btn" onclick="window.editLifetime(${p.id})">✏️</button>` : ''}
+    // ── Leaderboard ── expandable cards
+    const sorted = [...window.players].sort((a, b) => b.lifetime - a.lifetime);
+    const rankClass = ['gold', 'silver', 'bronze'];
+    const rankEmoji = ['🥇', '🥈', '🥉'];
+
+    document.getElementById('leaderboardList').innerHTML = sorted.map((p, i) => {
+        const stats = calcPlayerStats(p);
+        const profCls = p.lifetime >= 0 ? 'positive' : 'negative';
+        const profStr = (p.lifetime >= 0 ? '+' : '') + '₪' + p.lifetime;
+
+        const rankDisp = i < 3
+            ? `<span class="lb-rank ${rankClass[i]}">${rankEmoji[i]}</span>`
+            : `<span class="lb-rank">#${i + 1}</span>`;
+
+        let trendBadge = '';
+        if (stats) {
+            if (stats.trend === 'up')        trendBadge = '<span class="trend-badge trend-up">↑</span>';
+            else if (stats.trend === 'down') trendBadge = '<span class="trend-badge trend-down">↓</span>';
+            else                             trendBadge = '<span class="trend-badge trend-neutral">—</span>';
+        }
+
+        const sessionsMini = stats
+            ? `<div class="lb-sessions-mini">${stats.sessions} ערבים · ממוצע ${stats.avgPerSession >= 0 ? '+' : ''}₪${stats.avgPerSession}</div>`
+            : `<div class="lb-sessions-mini">אין היסטוריה</div>`;
+
+        let expandHtml = '';
+        if (stats) {
+            // streak dots — עד 8 אחרונים
+            const recentWL = stats.wl.slice(-8);
+            const streakDots = recentWL.map((v, idx) => {
+                const isCurrent = idx >= recentWL.length - stats.streak;
+                return `<div class="streak-dot ${v}" style="${isCurrent ? 'opacity:1' : 'opacity:0.35'}">${v === 'w' ? 'W' : 'L'}</div>`;
+            }).join('');
+
+            const streakLabel = stats.streakType === 'w'
+                ? `<span style="color:var(--poker-green)">רצף ניצחונות ${stats.streak}×</span>`
+                : `<span style="color:var(--poker-red)">רצף הפסדים ${stats.streak}×</span>`;
+
+            const adminBtns = isAdmin ? `<div class="lb-admin-row">
+                <button class="lb-admin-btn" onclick="event.stopPropagation();window.openPlayerChart(${p.id})">📈 גרף</button>
+                <button class="lb-admin-btn" onclick="event.stopPropagation();window.openHistoryEditor(${p.id})">📝 עריכה</button>
+                <button class="lb-admin-btn" onclick="event.stopPropagation();window.editLifetime(${p.id})">✏️ עדכן</button>
+            </div>` : '';
+
+            expandHtml = `<div class="lb-expand">
+                <div class="lb-divider"></div>
+                <div class="stats-grid">
+                    <div class="stat-tile">
+                        <span class="stat-label">ROI</span>
+                        <div class="stat-val ${stats.roi >= 0 ? 'positive' : 'negative'}">${stats.roi >= 0 ? '+' : ''}${stats.roi}%</div>
+                    </div>
+                    <div class="stat-tile">
+                        <span class="stat-label">ערבים</span>
+                        <div class="stat-val accent">${stats.sessions}</div>
+                    </div>
+                    <div class="stat-tile">
+                        <span class="stat-label">ממוצע/ערב</span>
+                        <div class="stat-val ${stats.avgPerSession >= 0 ? 'positive' : 'negative'}">${stats.avgPerSession >= 0 ? '+' : ''}₪${stats.avgPerSession}</div>
+                    </div>
+                    <div class="stat-tile wide">
+                        <span class="stat-label">סה"כ הושקע</span>
+                        <span class="stat-val" style="color:#aaa;">₪${stats.totalInvested}</span>
+                    </div>
                 </div>
-                <span class="price-display ${p.lifetime>=0?'positive':'negative'}" style="font-weight:900;">₪${p.lifetime}</span>
+                <div class="streak-row">
+                    <span class="streak-label">רצף:</span>
+                    <div class="streak-dots">${streakDots}</div>
+                    <span style="font-size:0.72rem;margin-right:auto;padding-right:8px;">${streakLabel}</span>
+                </div>
+                <div class="records-row">
+                    <div class="record-tile">
+                        <span class="rec-label">🏆 הערב הטוב</span>
+                        <div class="rec-val positive">+₪${stats.best.profit}</div>
+                        <div class="rec-date">${stats.best.date || ''}</div>
+                    </div>
+                    <div class="record-tile">
+                        <span class="rec-label">💀 הערב הגרוע</span>
+                        <div class="rec-val negative">₪${stats.worst.profit}</div>
+                        <div class="rec-date">${stats.worst.date || ''}</div>
+                    </div>
+                </div>
+                ${adminBtns}
+            </div>`;
+        }
+
+        return `<div class="lb-card" id="lbcard_${p.id}" onclick="window.toggleLbCard(${p.id})">
+            <div class="lb-main">
+                ${rankDisp}
+                <div class="lb-avatar-wrap">
+                    <div class="lb-avatar-inner">${getLbAvatarHtml(p.cards || '??')}</div>
+                </div>
+                <div class="lb-name-wrap">
+                    <div class="lb-name">${p.name} ${trendBadge}</div>
+                    ${sessionsMini}
+                </div>
+                <div class="lb-profit ${profCls}">${profStr}</div>
+                <div class="lb-chevron">▼</div>
             </div>
-        </div>`).join('');
+            ${expandHtml}
+        </div>`;
+    }).join('');
 
     // Sessions
     renderSessions(isAdmin);
@@ -875,22 +995,17 @@ function renderSessions(isAdmin) {
     document.getElementById('sessionsList').innerHTML = sessions.map((sess, idx) => {
         const dateStr = formatDate(sess.startTs);
         const timeStr = formatTime(sess.startTs) + ' — ' + formatTime(sess.lastTs);
-        const totalPot = sess.players.reduce((s,p) => s + p.invested, 0);
-        const totalProfit = sess.players.reduce((s,p) => s + p.profit, 0); // אמור להיות 0 תמיד
-
+        const totalPot = sess.players.reduce((s, p) => s + p.invested, 0);
         const playersHtml = sess.players.map(sp => {
             const profitCls = sp.profit >= 0 ? 'positive' : 'negative';
-            // rebuy log מהcashout
             const rebuyLogs = sp.cashouts.flatMap(c => c.rebuyLog || []);
-            const rebuyCount = sp.cashouts.reduce((s,c) => s + (c.rebuys || 0), 0);
-            // אם יש rebuyLog מפורט — מציג עם שעות. אחרת רק כמות
+            const rebuyCount = sp.cashouts.reduce((s, c) => s + (c.rebuys || 0), 0);
             let rebuyHtml = '';
             if (rebuyLogs.length > 0) {
                 rebuyHtml = rebuyLogs.map(r => `<span class="rebuy-tag">+₪${r.amount}${r.timestamp ? ' ' + formatTime(r.timestamp) : ''}</span>`).join(' ');
             } else if (rebuyCount > 0) {
                 rebuyHtml = `<span class="rebuy-tag">×${rebuyCount} ריביי</span>`;
             }
-
             return `<div class="session-player-row">
                 <div>
                     <div class="session-player-name">${sp.name}</div>
@@ -904,9 +1019,7 @@ function renderSessions(isAdmin) {
                 </div>
             </div>`;
         }).join('');
-
         const deleteBtn = isAdmin ? `<button class="delete-session-btn" onclick="window.deleteSession(${idx},[${sess.players.map(p=>`'${p.name}'`).join(',')}])">🗑️ מחק ערב זה</button>` : '';
-
         return `<div class="session-card">
             <div class="session-header" onclick="this.nextElementSibling.classList.toggle('open')">
                 <div>
